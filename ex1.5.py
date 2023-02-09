@@ -37,14 +37,12 @@ for i in range(35):
     k = timeit.timeit(lambda: genfunc2(i), number =1 )
     ttlist1.append(k)
 
-print(ttlist1)
 
 ttlist2 =[]
 for i in range(35):
     k = timeit.timeit(lambda: genfunc(i), number =1 )
     ttlist2.append(k)
 
-print(ttlist2)
 
 num_list = []
 for i in range(35):
@@ -53,6 +51,8 @@ for i in range(35):
 
 plt.plot(num_list,ttlist1, label = "Optimized")
 plt.plot(num_list,ttlist2, label = "Unoptimized")
+plt.ylabel("Seconds")
+plt.xlabel("Instances")
 plt.legend()
 plt.show()
 
