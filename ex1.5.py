@@ -9,9 +9,9 @@ def func(n):
     else:
         return func(n-1) + func(n-2)
 
-def genfunc() :
+def genfunc(n) :
     rez =[]
-    for i in range(35):
+    for i in range(n):
         rez.append(func(i)) 
     
 
@@ -27,25 +27,32 @@ def func2(n):
             cache[n] = func2(n-1) + func2(n-2)
             return cache[n]
 
-def genfunc2() :
+def genfunc2(n) :
     rez =[]
-    for i in range(35):
+    for i in range(n):
         rez.append(func2(i)) 
 
-timetaken =timeit.timeit(lambda: genfunc2(), number =1 )
-print(timetaken)
-timetaken2 = timeit.timeit(lambda: genfunc(), number =1 )
-print(timetaken2)
+ttlist1 =[]
+for i in range(35):
+    k = timeit.timeit(lambda: genfunc2(i), number =1 )
+    ttlist1.append(k)
+
+print(ttlist1)
+
+ttlist2 =[]
+for i in range(35):
+    k = timeit.timeit(lambda: genfunc(i), number =1 )
+    ttlist2.append(k)
+
+print(ttlist2)
+
+num_list = []
+for i in range(35):
+    num_list.append(i)
 
 
-fig, ax = plt.subplots()
-timetake = [timetaken,timetaken2]
-print(timetake)
-labels = ["Optimized", "Unoptimized"]
-plt.bar(labels,timetake)
-plt.ylim(0, 6)
-ax.set_ylabel("Time taken (s)")
-
+plt.plot(num_list,ttlist1, label = "Optimized")
+plt.plot(num_list,ttlist2, label = "Unoptimized")
+plt.legend()
 plt.show()
-
 
